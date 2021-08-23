@@ -2,7 +2,9 @@
 using namespace std;
 
 void intercambia(int a, int b,int arreglo[]){
-
+    int aux=arreglo[a];
+    arreglo[a]=arreglo[b];
+    arreglo[b]=aux;
 }
 
 void ordenamientoPorIntercambio(int arreglo[],int tamanioArreglo){
@@ -11,9 +13,7 @@ void ordenamientoPorIntercambio(int arreglo[],int tamanioArreglo){
             cout<<"Estamos comparando el elemnto en la pos :  "<<i<<" que es "<<arreglo[i]<<" con el elemento en la pos "<<j<<" que es "<<arreglo[j]<<endl;
             if(arreglo[i]>arreglo[j]){
                 cout<<"Intercambiamos el "<<arreglo[i]<<" con el "<< arreglo[j]<<endl;
-                int aux=arreglo[i];
-                arreglo[i]=arreglo[j];
-                arreglo[j]=aux;
+                intercambia(i,j,arreglo);
             }
         }
     }    
@@ -22,12 +22,12 @@ void ordenamientoPorIntercambio(int arreglo[],int tamanioArreglo){
 void ordenamientoPorBurbuja(int arreglo[],int tamanioArreglo){
     bool hizoIntercambio=true;
     for(int i=0;(i<tamanioArreglo-1)&&hizoIntercambio;i++){
+        cout<<"Entra a nuestra n "<<i+1<< endl; 
         bool hizoIntercambio=false;
         for(int j=0;j<(tamanioArreglo-i-1);j++){
             if(arreglo[j+1]<arreglo[j]){
-                int aux=arreglo[j];
-                arreglo[j]=arreglo[j+1];
-                arreglo[j+1]=aux; 
+                cout<<"Entra a nuestro intercambio "<<j+1<< endl; 
+                intercambia(j,j+1,arreglo);
                 hizoIntercambio=true;               
             }
         }
@@ -44,7 +44,7 @@ void imprimirArreglo(int arreglo[],int tamanioArreglo){
 }
 
 int main(){
-    int arreglo[]={8,4,6,2,10,5,11,15,12,1,-1};
+    int arreglo[]={11,10,9,8,7,6,5,4,3,2,1};
     int tamanioArreglo=sizeof(arreglo)/sizeof(arreglo[0]);
     ordenamientoPorBurbuja(arreglo,tamanioArreglo);
     imprimirArreglo(arreglo,tamanioArreglo);
