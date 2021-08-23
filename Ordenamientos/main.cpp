@@ -16,11 +16,14 @@ void ordenamientoPorIntercambio(int arreglo[],int tamanioArreglo){
     }    
 }
 
-
-
 int main(){
     int arreglo[]={8,4,6,2};
     int tamanioArreglo=sizeof(arreglo)/sizeof(arreglo[0]);
     ordenamientoPorIntercambio(arreglo,tamanioArreglo);
+    cout<<"{";
+    for(int i=0;i<tamanioArreglo;i++){
+        cout<<arreglo[i]<<",";
+    }
+    cout<<"}"<<endl;
     return 0;
 }
