@@ -86,10 +86,49 @@ void imprimirArreglo(int arreglo[],int tamanioArreglo){
     cout<<"}"<<endl;
 }
 
+int busquedaLineal(int arreglo[],int tamanioArreglo,int aEncontrar){
+    int indiceEncontrado=-1;
+    //También puedo hacerlo con un while
+    for(int i=0;i<tamanioArreglo;i++){
+        if(arreglo[i]==aEncontrar){
+            indiceEncontrado=i;
+            return indiceEncontrado;
+        }
+    }
+    return indiceEncontrado;
+}
+
+int busquedaBinaria(int arreglo[],int tamanioArreglo,int aEncontrar){
+    int inicio=0;
+    int fin= tamanioArreglo-1;
+    int centro = (tamanioArreglo-1)/2;
+
+    while(inicio<=fin){ //Podríamos pensar que esto es complejidad O(n)
+        centro=(inicio+fin)/2; // Aqui se reduce el numero de casos a la mitad-> O(log n)
+        if(aEncontrar==arreglo[centro]){
+            return centro;
+        }else if(aEncontrar<arreglo[centro]){
+            fin=centro-1;
+        }else{
+            inicio=centro+1;
+        }
+    }
+    return -1;
+}
+
 int main(){
     int arreglo[]={3,1,7,5,10,8,6,11,13,4,0};
     int tamanioArreglo=sizeof(arreglo)/sizeof(arreglo[0]);
     ordenamientoPorInsercion(arreglo,tamanioArreglo);
     imprimirArreglo(arreglo,tamanioArreglo);
+    cout<<"Dame el elemento que quieres buscar: "<<endl;
+    int aEncontrar;
+    cin>>aEncontrar;
+    int indiceEncontrado=busquedaBinaria(arreglo,tamanioArreglo,aEncontrar);
+    if(indiceEncontrado>-1){
+        cout<<"El índice que buscas es: "<<indiceEncontrado<<endl;
+    }else{
+        cout<<"El elemento "<<aEncontrar<<" no existe en tu arreglo "<<endl;
+    }
     return 0;
 }
