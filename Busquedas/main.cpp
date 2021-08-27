@@ -38,7 +38,7 @@ void ordenamientoPorSeleccion(int arreglo[], int tamanioArreglo){
     for(int i=0;i<tamanioArreglo;i++){
         int masPequenio=i;
         for(int j=i;j<tamanioArreglo;j++){
-            if(arreglo[j]<arreglo[masPequenio]){
+            if(arreglo[j]>arreglo[masPequenio]){
                 masPequenio=j;
             }
         }
@@ -119,7 +119,7 @@ int busquedaBinaria(int arreglo[],int tamanioArreglo,int aEncontrar){
 int main(){
     int arreglo[]={3,1,7,5,10,8,6,11,13,4,0};
     int tamanioArreglo=sizeof(arreglo)/sizeof(arreglo[0]);
-    ordenamientoPorInsercion(arreglo,tamanioArreglo);
+    ordenamientoPorSeleccion(arreglo,tamanioArreglo);
     imprimirArreglo(arreglo,tamanioArreglo);
     cout<<"Dame el elemento que quieres buscar: "<<endl;
     int aEncontrar;
