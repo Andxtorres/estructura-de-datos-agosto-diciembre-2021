@@ -1,14 +1,15 @@
 #include <iostream>
 using namespace std;
+template <class T>
 class Ordenamiento{
     public:
-        void intercambia(int a, int b,int arreglo[]){
-            int aux=arreglo[a];
+        void intercambia(int a, int b,T arreglo[]){
+            T aux=arreglo[a];
             arreglo[a]=arreglo[b];
             arreglo[b]=aux;
         }
 
-        void ordenamientoPorIntercambio(int arreglo[],int tamanioArreglo){
+        void ordenamientoPorIntercambio(T arreglo[],int tamanioArreglo){
             for(int i=0;i<tamanioArreglo;i++){
                 for(int j=i+1;j<tamanioArreglo;j++){
                     cout<<"Estamos comparando el elemnto en la pos :  "<<i<<" que es "<<arreglo[i]<<" con el elemento en la pos "<<j<<" que es "<<arreglo[j]<<endl;
@@ -20,7 +21,7 @@ class Ordenamiento{
             }    
         }
 
-        void ordenamientoPorBurbuja(int arreglo[],int tamanioArreglo){
+        void ordenamientoPorBurbuja(T arreglo[],int tamanioArreglo){
             bool hizoIntercambio=true;
             for(int i=0;(i<tamanioArreglo-1)&&hizoIntercambio;i++){
                 cout<<"Entra a nuestra n "<<i+1<< endl; 
@@ -35,7 +36,7 @@ class Ordenamiento{
             }   
         }
 
-        void ordenamientoPorSeleccion(int arreglo[], int tamanioArreglo){
+        void ordenamientoPorSeleccion(T arreglo[], int tamanioArreglo){
             for(int i=0;i<tamanioArreglo;i++){
                 int masPequenio=i;
                 for(int j=i;j<tamanioArreglo;j++){
@@ -49,7 +50,7 @@ class Ordenamiento{
             }
         }
 
-        void ordenamientoPorInsercion(int arreglo[],int tamanioArreglo){
+        void ordenamientoPorInsercion(T arreglo[],int tamanioArreglo){
             for (int i=1;i<tamanioArreglo;i++){
                 int indiceOrdenado=i;// Ejemplo: iteración 1-> indiceOrdenado=1; iteración 2-> indiceOrdenado=2; iteración 3-> indiceOrdenado=3
                 int auxiliar=arreglo[i];// iteración 1-> auxiliar = 3; iteración 2 auxiliar= 42; iteración 3 auxiliar=17
@@ -79,7 +80,7 @@ class Ordenamiento{
         }
 
 
-        void imprimirArreglo(int arreglo[],int tamanioArreglo){
+        void imprimirArreglo(T arreglo[],int tamanioArreglo){
             cout<<"{";
             for(int i=0;i<tamanioArreglo;i++){
                 cout<<arreglo[i]<<",";

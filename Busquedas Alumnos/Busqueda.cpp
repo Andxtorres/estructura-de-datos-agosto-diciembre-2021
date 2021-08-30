@@ -1,8 +1,9 @@
 #include <iostream>
 using namespace std;
+template <class T>
 class Busqueda{
     public:
-        int busquedaLineal(int arreglo[],int tamanioArreglo,int aEncontrar){
+        int busquedaLineal(T arreglo[],int tamanioArreglo,T aEncontrar){
             int indiceEncontrado=-1;
             //También puedo hacerlo con un while
             for(int i=0;i<tamanioArreglo;i++){
@@ -14,7 +15,7 @@ class Busqueda{
             return indiceEncontrado;
         }
 
-        int busquedaBinaria(int arreglo[],int tamanioArreglo,int aEncontrar){
+        int busquedaBinaria(T arreglo[],int tamanioArreglo,T aEncontrar){
             int inicio=0;
             int fin= tamanioArreglo-1;
             int centro = (tamanioArreglo-1)/2;

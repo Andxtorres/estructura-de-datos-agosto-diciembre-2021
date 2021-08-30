@@ -44,5 +44,9 @@ class Alumno{
             }
             return resultado;
         }
+        friend ostream &operator<<( ostream &output, const Alumno &alumno ) { 
+            output << "{Alumno : " << alumno.nombre<< " matricula: "<<alumno.matricula<<" calif: "<<alumno.calificacion<<"}";
+            return output;            
+        }
 };
 #endif
