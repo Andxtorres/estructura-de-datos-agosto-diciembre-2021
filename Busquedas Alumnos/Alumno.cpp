@@ -6,7 +6,7 @@ Alumno::Alumno(string nombre,string matricula,int calificacion){
     this->calificacion=calificacion;
 }
 
-string Alumno::getNombre(){
+string Alumno::getNombre() const{
     return nombre;
 }
 

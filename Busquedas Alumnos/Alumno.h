@@ -11,7 +11,7 @@ class Alumno{
     
     public:
         Alumno(string nombre,string matricula, int calificacion);
-        string getNombre();
+        string getNombre() const;
         string getMatricula();
         int getCalificacion();
         void setNombre(string nombre);
@@ -45,7 +45,7 @@ class Alumno{
             return resultado;
         }
         friend ostream &operator<<( ostream &output, const Alumno &alumno ) { 
-            output << "{Alumno : " << alumno.nombre<< " matricula: "<<alumno.matricula<<" calif: "<<alumno.calificacion<<"}";
+            output << "{Alumno : " << alumno.getNombre()<< " matricula: "<<alumno.matricula<<" calif: "<<alumno.calificacion<<"}";
             return output;            
         }
 };
