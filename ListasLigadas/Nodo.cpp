@@ -1,3 +1,7 @@
+#ifndef NODO_DEFINED
+#define NODO_DEFINED
+
+#include <iostream>
 template <class T>
 class Nodo{
     private:
@@ -7,6 +11,7 @@ class Nodo{
     public:
         Nodo(T dato){
             this->dato=dato;
+            this->siguiente=NULL;
         }
         Nodo(T dato,Nodo<T> *siguiente){
             this->dato=dato;
@@ -25,3 +30,5 @@ class Nodo{
             this->dato=dato;
         }
 };
+
+#endif
