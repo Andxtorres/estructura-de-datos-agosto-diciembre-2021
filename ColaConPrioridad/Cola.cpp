@@ -31,7 +31,7 @@ class Cola{
             }
             size++;
         }
-
+        //Complejidad O(n)
         T pop(){
             if(!isEmpty()){
                 if(size==1){
@@ -66,12 +66,17 @@ class Cola{
                 throw "No hay elementos en la pila";
             }
         }
-
+        //Complejidad O(n)
         T front(){
-            if(primero==NULL){
-                throw "Exception en metodo front no puede estar vacio";
+            Nodo<T> *temp=primero;
+            Nodo<T> *nodoPrioridadMaxima=primero;
+            while (temp->getSiguiente()!=NULL){
+                if(temp->getPrioridad()<nodoPrioridadMaxima->getPrioridad()){
+                    nodoPrioridadMaxima=temp;
+                }
+                temp=temp->getSiguiente();
             }
-            return primero->getDato();
+            return nodoPrioridadMaxima->getDato();
         }
 
         bool isEmpty(){
