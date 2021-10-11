@@ -2,6 +2,7 @@
 #define ARBOLABB_DEFINED
 #include <iostream>
 #include "Nodo.cpp"
+#include "Cola.cpp"
 using namespace std;
 template <class T>
 class ArbolAbb{
@@ -124,8 +125,8 @@ class ArbolAbb{
                             // Quiere decir que tiene dos hijos
                             Nodo<T> *hojaMasGrande=temp->getIzquierda();
                             Nodo<T> *padreHojaMasPequenia=temp->getDerecha();
-                            while(hojaMasPequenia->getDerecha()!=NULL){
-                                hojaMasGrande=hojaMasPequenia->getDerecha();
+                            while(hojaMasGrande->getDerecha()!=NULL){
+                                hojaMasGrande=hojaMasGrande->getDerecha();
                             }      
                             cout<<"La hoja mas grande de tus pequeñas es: "<<hojaMasGrande->getDato()<<endl;
                             hojaMasGrande->setDerecha(temp->getDerecha()->getIzquierda());
@@ -149,10 +150,7 @@ class ArbolAbb{
                 }
               
             }
-
-
         }
-
 
         void imprimirRec(Nodo<T> *nodo){
             if(nodo!=NULL){
@@ -175,7 +173,101 @@ class ArbolAbb{
             imprimirRec(raiz);
         }
 
+        void recorreEnPreOrdenRec(Nodo<T> *raiz){
+            if(raiz==NULL){
+            }else{
+                cout<<raiz->getDato()<<",";
+                recorreEnPreOrdenRec(raiz->getIzquierda());
+                recorreEnPreOrdenRec(raiz->getDerecha());
+            }
+        }
+        void recorreEnPreOrden(){
+            recorreEnPreOrdenRec(raiz);
+            cout<<endl;
+        }
 
+        void recorreEnOrdenRec(Nodo<T> *raiz){
+            if(raiz==NULL){
+
+            }else{
+                recorreEnOrdenRec(raiz->getIzquierda());
+                cout<<raiz->getDato()<<",";
+                recorreEnOrdenRec(raiz->getDerecha());
+            }
+        }
+        void recorreEnOrden(){
+            recorreEnOrdenRec(raiz);
+            cout<<endl;
+        }
+
+        void recorreEnPostOrdenRec(Nodo<T> *raiz){
+            if(raiz==NULL){
+
+            }else{
+                recorreEnPostOrdenRec(raiz->getIzquierda());
+                recorreEnPostOrdenRec(raiz->getDerecha());
+                cout<<raiz->getDato()<<",";
+            }
+        }
+        void recorreEnPostOrden(){
+            recorreEnPostOrdenRec(raiz);
+            cout<<endl;
+        }
+
+        void recorreEnPreOrdenConversoRec(Nodo<T> *raiz){
+            if(raiz==NULL){
+            }else{
+                cout<<raiz->getDato()<<",";
+                recorreEnPreOrdenRec(raiz->getDerecha());
+                recorreEnPreOrdenRec(raiz->getIzquierda());
+            }
+        }
+        void recorreEnPreOrdenConverso(){
+            recorreEnPreOrdenConversoRec(raiz);
+            cout<<endl;
+        }
+        void recorreEnPostOrdenConversoRec(Nodo<T> *raiz){
+            if(raiz==NULL){
+
+            }else{
+                recorreEnPostOrdenConverso(raiz->getDerecha());
+                recorreEnPostOrdenConverso(raiz->getIzquierda());
+                cout<<raiz->getDato()<<",";
+            }
+        }
+        void recorreEnPostOrdenConverso(){
+            recorreEnPostOrdenConversoRec(raiz);
+            cout<<endl;
+        }
+        void recorreEnOrdenConversoRec(Nodo<T> *raiz){
+            if(raiz==NULL){
+
+            }else{
+                recorreEnOrdenConversoRec(raiz->getDerecha());
+                cout<<raiz->getDato()<<",";
+                recorreEnOrdenConversoRec(raiz->getIzquierda());
+            }
+        }
+        void recorreEnOrdenConverso(){
+            recorreEnOrdenConversoRec(raiz);
+            cout<<endl;
+        }  
+
+        void recorridoNivelPorNivel(){
+            Cola<Nodo<T> > cola;
+            cola.push(raiz);
+            while(!cola.isEmpty()){
+                Nodo<T> temp= cola.pop();
+                cout<<temp.getDato()<<endl;
+                if(temp.getIzquierda()!=NULL){
+                    cola.push(temp.getIzquierda());
+                }
+                if(temp.getDerecha()!=NULL){
+                    cola.push(temp.getDerecha());
+                }
+
+            }
+        }      
 };
 
 #endif

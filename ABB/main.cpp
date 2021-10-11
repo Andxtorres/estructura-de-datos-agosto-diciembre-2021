@@ -3,17 +3,18 @@
 using namespace std;
 
 int main(){
-    ArbolAbb<int> arbol;
-    arbol.agregar(4);
-    arbol.agregar(3);
-    arbol.agregar(0); 
-    arbol.agregar(2);
-    arbol.agregar(1);
-    arbol.agregar(-3);
-    arbol.agregar(-2);
-    arbol.agregar(-1);  
-    arbol.imprimir();
-    arbol.borrar(0);
-    arbol.imprimir();
+    ArbolAbb<string> arbol;
+    arbol.agregar("#");
+    arbol.agregar("@");
+    arbol.agregar("2");
+    arbol.agregar("$");
+    arbol.agregar("8");
+    arbol.agregar("A");
+    arbol.agregar("5");
+    arbol.agregar("%");
+    arbol.recorreEnPreOrden();
+    arbol.recorreEnOrden();
+    arbol.recorreEnPostOrden();
+    arbol.recorridoNivelPorNivel();
     return -1;
 }
