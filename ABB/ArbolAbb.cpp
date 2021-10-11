@@ -59,9 +59,9 @@ class ArbolAbb{
             return datoABuscar;
         }
         void borrar(T dato){
-            //Si el que quiero eliminar es mi raiz
             //Implementar qué pasa cuando el que quiero borrar no tiene dos hijos.
             
+            //Si el que quiero eliminar es mi raiz
             Nodo<T> *temp=raiz;
             Nodo<T> *aMover;
             if(dato==raiz->getDato()){
@@ -77,10 +77,12 @@ class ArbolAbb{
                 padreHojaMasPequenia->setIzquierda(aMover);
             }else{
                 Nodo<T> *temp=raiz;
+                Nodo<T> *anterior=raiz;
                 while(temp!=NULL){
                     if(temp->getDato()==dato){
                         break;
                     }
+                    anterior=temp;
                     if(dato<temp->getDato()){
                         temp=temp->getIzquierda();
                     }else{
@@ -90,7 +92,60 @@ class ArbolAbb{
                 if(temp==NULL){
                     cout<<"No encontre el dato"<<endl;
                 }else{
-                    //Implementar cuando no es raíz qué debe pasar con el borrado.                     
+                    cout<<"Encontre el dato a eliminar "<< temp->getDato()<< " y anterior "<< anterior->getDato()<< endl;
+                    if(anterior->getDato()>temp->getDato()){
+                        if(temp->getIzquierda()!=NULL && temp->getDerecha()!=NULL){
+                            // Quiere decir que tiene dos hijos
+                            Nodo<T> *hojaMasPequenia=temp->getDerecha();
+                            Nodo<T> *padreHojaMasPequenia=temp->getDerecha();
+                            while(hojaMasPequenia->getIzquierda()!=NULL){
+                                hojaMasPequenia=hojaMasPequenia->getIzquierda();
+                            }      
+                            cout<<"La hoja mas pequeño de tus grandes es: "<<hojaMasPequenia->getDato()<<endl;
+                            hojaMasPequenia->setIzquierda(temp->getIzquierda()->getDerecha());
+                            anterior->setIzquierda(temp->getIzquierda());
+                            Nodo<T> *derechoDeTemp=temp->getDerecha();
+                            Nodo<T> *izquierdoDeTemp=temp->getIzquierda();
+                            cout<<"Tu temporal izquierda es "<<izquierdoDeTemp->getDato()<<endl;
+                            cout<<"Tu temporal derecha es "<<derechoDeTemp->getDato()<<endl;
+                            izquierdoDeTemp->setDerecha(derechoDeTemp);
+                        }else{
+                            if(temp->getIzquierda()!=NULL){
+                                anterior->setIzquierda(temp->getIzquierda());
+                            }else{
+                                anterior->setIzquierda(temp->getDerecha());
+                            }
+                        }
+
+                        
+                    }
+                    if(anterior->getDato()<temp->getDato()){
+                        if(temp->getIzquierda()!=NULL && temp->getDerecha()!=NULL){
+                            // Quiere decir que tiene dos hijos
+                            Nodo<T> *hojaMasGrande=temp->getIzquierda();
+                            Nodo<T> *padreHojaMasPequenia=temp->getDerecha();
+                            while(hojaMasPequenia->getDerecha()!=NULL){
+                                hojaMasGrande=hojaMasPequenia->getDerecha();
+                            }      
+                            cout<<"La hoja mas grande de tus pequeñas es: "<<hojaMasGrande->getDato()<<endl;
+                            hojaMasGrande->setDerecha(temp->getDerecha()->getIzquierda());
+                            anterior->setDerecha(temp->getDerecha());
+                            Nodo<T> *derechoDeTemp=temp->getDerecha();
+                            Nodo<T> *izquierdoDeTemp=temp->getIzquierda();
+                            cout<<"Tu temporal izquierda es "<<izquierdoDeTemp->getDato()<<endl;
+                            cout<<"Tu temporal derecha es "<<derechoDeTemp->getDato()<<endl;
+                            derechoDeTemp->setDerecha(izquierdoDeTemp);
+
+                        }else{
+                            if(temp->getIzquierda()!=NULL){
+                                anterior->setDerecha(temp->getIzquierda());
+                            }else{
+                                anterior->setDerecha(temp->getDerecha());
+                            }
+                        }
+
+                        
+                    }                    
                 }
               
             }
