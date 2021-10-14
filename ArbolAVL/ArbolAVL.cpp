@@ -57,7 +57,20 @@ class ArbolAVL{
             }
             return izquierdaPivote;
         }
-
+        Nodo<T>* rotarALaIzquierda(Nodo<T> *pivote){
+            cout<<"Entra rotacion a la izquierda "<<endl;
+            Nodo<T> *derechaPivote= pivote->getDerecha();
+            Nodo<T> *izquierdaPivote= pivote->getIzquierda();
+            derechaPivote->setIzquierda(pivote);
+            pivote->setDerecha(izquierdaPivote);
+            if(derechaPivote!=NULL){
+                derechaPivote->setAltura(1+ alturaMaxima(derechaPivote->getDerecha(),derechaPivote->getIzquierda()));
+            }
+            if(izquierdaPivote!=NULL){
+                izquierdaPivote->setAltura(1+ alturaMaxima(izquierdaPivote->getDerecha(),izquierdaPivote->getIzquierda()));
+            }
+            return derechaPivote;
+        }
         Nodo<T>* insertarRec(Nodo<T> *nodo,T dato){
             cout<<"Insertando nodo "<<dato<<endl; 
             if(nodo==NULL){
@@ -76,6 +89,17 @@ class ArbolAVL{
             if (fb>1 && dato<nodo->getIzquierda()->getDato()){
                 return rotarALaDerecha(nodo);
             }
+            if (fb<-1 && dato>nodo->getDerecha()->getDato()){
+                return rotarALaIzquierda(nodo);
+            }    
+            if (fb>1 && dato>nodo->getIzquierda()->getDato()){
+                nodo->setIzquierda(rotarALaIzquierda(nodo->getIzquierda()));
+                return rotarALaDerecha(nodo);
+            }  
+            if (fb<-1 && dato<nodo->getDerecha()->getDato())){
+                nodo->setDerecha(rotarALaDerecha(nodo->getDerecha()));
+                return rotarALaIzquierda(nodo);
+            }                    
             return nodo;
         }
         void insertar(T dato){
