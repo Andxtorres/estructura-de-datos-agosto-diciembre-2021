@@ -35,12 +35,13 @@ class Cola{
             if(!isEmpty()){
                 NodoCola<T> *temp=primero;
                 T dato=primero->getDato();
-                //cout << primero->getSiguiente();
                 primero = temp->getSiguiente();
+                size--;
                 return dato;
             }else{
                 throw "No hay elementos en la pila";
             }
+            
         }
 
         T front(){
