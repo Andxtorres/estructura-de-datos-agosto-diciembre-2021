@@ -36,52 +36,50 @@ class ArbolAVL{
             int fbDerecho=0;
             if(nodo->getIzquierda()!=NULL){
                 fbIzquierdo=nodo->getIzquierda()->getAltura();
-                cout<<"Nodo izquierdo de "<< nodo->getDato()<<" "<< fbIzquierdo<<endl;
-               
             }
             if(nodo->getDerecha()!=NULL){
                 fbDerecho=nodo->getDerecha()->getAltura();
-                cout<<"Nodo derecho de "<< nodo->getDato()<<" "<< fbDerecho<<endl;
-
             }
+            cout<<"Factor de balance de nodo "<<nodo->getDato()<<" derecha "<<fbDerecho<<" e izquierda "<<fbIzquierdo <<endl ;
+
             return fbIzquierdo-fbDerecho;
         }
 
         Nodo<T>* rotarALaDerecha(Nodo<T> *pivote){
-            cout<<"Entra rotacion a la derecha "<<endl;
-            Nodo<T> *derechaPivote= pivote->getDerecha();
+            cout<<"Entra rotación a la derecha "<<endl;
             Nodo<T> *izquierdaPivote= pivote->getIzquierda();
+            Nodo<T> *nuevaDerecha= izquierdaPivote->getDerecha();
+
             izquierdaPivote->setDerecha(pivote);
-            pivote->setIzquierda(derechaPivote);
-            if(izquierdaPivote!=NULL){
-                izquierdaPivote->setAltura(1+ alturaMaxima(izquierdaPivote->getDerecha(),izquierdaPivote->getIzquierda()));
-            }
+            pivote->setIzquierda(nuevaDerecha);
             if(pivote!=NULL){
                 pivote->setAltura(1+ alturaMaxima(pivote->getDerecha(),pivote->getIzquierda()));
+            }            
+            if(izquierdaPivote!=NULL){
+                izquierdaPivote->setAltura(1+ alturaMaxima(izquierdaPivote->getDerecha(),izquierdaPivote->getIzquierda()));
             }
             return izquierdaPivote;
         }
         Nodo<T>* rotarALaIzquierda(Nodo<T> *pivote){
-            cout<<"Entra rotacion a la izquierda "<<endl;
             Nodo<T> *derechaPivote= pivote->getDerecha();
-            Nodo<T> *izquierdaPivote= pivote->getIzquierda();
+            cout<<"Entra como pivote a rotación a la izquierda "<<pivote->getDato()<<" y su derecha "<<derechaPivote->getDato()<<endl;
+
+            Nodo<T> *nuevaIzquierda= derechaPivote->getIzquierda();
             derechaPivote->setIzquierda(pivote);
-            pivote->setDerecha(izquierdaPivote);
-            if(derechaPivote!=NULL){
-                derechaPivote->setAltura(1+ alturaMaxima(derechaPivote->getDerecha(),derechaPivote->getIzquierda()));
-            }
+            pivote->setDerecha(nuevaIzquierda);
             if(pivote!=NULL){
                 pivote->setAltura(1+ alturaMaxima(pivote->getDerecha(),pivote->getIzquierda()));
+            }
+            if(derechaPivote!=NULL){
+                derechaPivote->setAltura(1+ alturaMaxima(derechaPivote->getDerecha(),derechaPivote->getIzquierda()));
             }
             return derechaPivote;
         }
         Nodo<T>* insertarRec(Nodo<T> *nodo,T dato){
-            cout<<"Insertando nodo "<<dato<<endl;
             if(nodo==NULL){
                 return new Nodo<T>(dato);
             }
-            cout<<"Insertando nodo "<<dato<<" con nodo entrada "<<nodo->getDato()<<endl; 
-
+            cout<<"Insertando el nodo "<<dato<< " con ancestro "<< nodo->getDato()<<endl;
             if(dato<nodo->getDato()){
                 nodo->setIzquierda(insertarRec(nodo->getIzquierda(),dato));
             }
@@ -90,12 +88,11 @@ class ArbolAVL{
             } 
                  
             nodo->setAltura(1+alturaMaxima(nodo->getIzquierda(),nodo->getDerecha()));
-            cout<<"Actualizando altura de nodo "<<nodo->getDato()<<" altura: "<<nodo->getAltura()<<endl; 
             int fb=calcularFb(nodo);
-            cout<<"El factor de balance de tu nodo "<<nodo->getDato()<<" es "<<fb<<endl;
             if (fb>1 && dato<nodo->getIzquierda()->getDato()){
                 return rotarALaDerecha(nodo);
             }
+            cout<<"Factor de equilibrio del nodo "<<nodo->getDato()<<" es "<< fb<<endl;
             if (fb<-1 && dato>nodo->getDerecha()->getDato()){
                 return rotarALaIzquierda(nodo);
             }    
@@ -116,9 +113,9 @@ class ArbolAVL{
         void imprimirRec(Nodo<T> *nodo){
             if(nodo!=NULL){
                 if(nodo->getDerecha()==NULL && nodo->getIzquierda()==NULL){
-                    cout<<"HOJA: "<<nodo->getDato()<<" ";
+                    cout<<"HOJA: "<<nodo->getDato()<<" "<<endl;
                 }else{
-                    cout<<"DATO: "<<nodo->getDato()<<endl;
+                    cout<<"DATO: "<<nodo->getDato()<<" ("<<nodo->getAltura()<<")"<<endl;
                     cout<<"SUBARBOL DERECHO DE " <<nodo->getDato()<<": ";
                     imprimirRec(nodo->getDerecha());
                     cout<<endl;
@@ -132,6 +129,8 @@ class ArbolAVL{
         }  
 
         void imprimir(){
+            cout<<"-------Imprimiendo árbol----------"<<endl;
+
             imprimirRec(raiz);
         }          
 };
