@@ -258,7 +258,7 @@ class ArbolAbb{
             cola.push(raiz);
             while(!cola.isEmpty()){
                 Nodo<T>* temp= cola.pop();
-                cout<<temp->getDato()<<endl;
+                cout<<temp->getDato()<<",";
                 if(temp->getIzquierda()!=NULL){
                     cola.push(temp->getIzquierda());
                 }

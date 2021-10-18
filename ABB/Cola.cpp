@@ -20,7 +20,6 @@ class Cola{
         void push(T dato){
             NodoCola<T> *nodo=new NodoCola<T>(dato);
             if(isEmpty()){
-                cout<<"Entra insertar primer nodo"<<endl;
                 primero=nodo;
             }else{
                 NodoCola<T> *temp=primero;
@@ -33,7 +32,6 @@ class Cola{
         }
 
         T pop(){
-            cout << isEmpty() << endl;
             if(!isEmpty()){
                 NodoCola<T> *temp=primero;
                 T dato=primero->getDato();
