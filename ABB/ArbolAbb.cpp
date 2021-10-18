@@ -254,16 +254,16 @@ class ArbolAbb{
         }  
 
         void recorridoNivelPorNivel(){
-            Cola<Nodo<T> > cola;
+            Cola<Nodo<T>*> cola;
             cola.push(raiz);
             while(!cola.isEmpty()){
-                Nodo<T> temp= cola.pop();
-                cout<<temp.getDato()<<endl;
-                if(temp.getIzquierda()!=NULL){
-                    cola.push(temp.getIzquierda());
+                Nodo<T>* temp= cola.pop();
+                cout<<temp->getDato()<<endl;
+                if(temp->getIzquierda()!=NULL){
+                    cola.push(temp->getIzquierda());
                 }
-                if(temp.getDerecha()!=NULL){
-                    cola.push(temp.getDerecha());
+                if(temp->getDerecha()!=NULL){
+                    cola.push(temp->getDerecha());
                 }
 
             }

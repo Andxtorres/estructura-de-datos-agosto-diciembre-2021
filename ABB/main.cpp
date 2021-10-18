@@ -3,15 +3,15 @@
 using namespace std;
 
 int main(){
-    ArbolAbb<string> arbol;
-    arbol.agregar("#");
-    arbol.agregar("@");
-    arbol.agregar("2");
-    arbol.agregar("$");
-    arbol.agregar("8");
-    arbol.agregar("A");
-    arbol.agregar("5");
-    arbol.agregar("%");
+    ArbolAbb<int> arbol;
+    arbol.agregar(1);
+    arbol.agregar(2);
+    arbol.agregar(3);
+    arbol.agregar(4);
+    arbol.agregar(5);
+    arbol.agregar(6);
+    arbol.agregar(7);
+    arbol.agregar(8);
     arbol.recorreEnPreOrden();
     arbol.recorreEnOrden();
     arbol.recorreEnPostOrden();
