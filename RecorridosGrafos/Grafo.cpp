@@ -9,11 +9,13 @@ class Grafo{
     private: 
         int numeroVertices;
         list<int> *adyacencias;
+        bool *visitadosDfs;
 
     public: 
         Grafo(int numeroVertices){
             this->numeroVertices=numeroVertices;
             adyacencias= new list<int>[numeroVertices];
+            visitadosDfs=new bool[numeroVertices];
         } 
 
         void agregarAdyacencia(int inicio, int fin){
@@ -54,7 +56,24 @@ class Grafo{
             }
 
             cout<<endl;
+        }
 
+        void dfs(int vertice){
+            dfsRec(vertice);
+            cout<<endl;
+            for(int i=0;i<numeroVertices;i++){
+                visitadosDfs[i]=false;
+            }            
+        }
+
+        void dfsRec(int vertice){
+            visitadosDfs[vertice]=true;
+            cout<<vertice;
+            for(auto vecino:adyacencias[vertice]){
+                if(!visitadosDfs[vecino]){
+                    dfsRec(vecino);
+                }
+            } 
         }
 
 

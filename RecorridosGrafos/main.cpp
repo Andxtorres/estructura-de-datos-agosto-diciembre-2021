@@ -23,7 +23,9 @@ int main(){
     
 
     grafo.bfs(0);
-
+    grafo.dfs(0);
+    grafo.bfs(0);
+    grafo.dfs(0);
     return -1;
 
 }
