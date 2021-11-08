@@ -3,14 +3,6 @@
 #include <list>
 
 using namespace std;
-void imprimeMatriz(bool matriz[5][5],int tamanio){
-    for (int i=0;i<tamanio;i++){
-        for (int j=0;j<tamanio;j++){
-            cout<<matriz[i][j]<< " ";  
-        }
-        cout <<endl;
-    }
-}
 int main(){
 
     bool matriz[5][5]={
@@ -20,6 +12,10 @@ int main(){
         {false,false,false,false,false},
         {false,false,false,false,false}
     };
+    bool * matrizRef[5];
+    for (int i=0;i<5;i++){
+        matrizRef[i]=matriz[i];
+    }
 
     list<int> adyacencias0;
     adyacencias0.push_back(1);
@@ -32,8 +28,8 @@ int main(){
     list<int> adyacencias4;
     adyacencias4.push_back(2);               
     list<int> listaAdyacencias[5]={adyacencias0,adyacencias1,adyacencias2,adyacencias3,adyacencias4}; 
-    Grafo grafo(5,5,listaAdyacencias,&matriz);
-    grafo.imprimeGrafo();
-    imprimeMatriz(matriz,5);
+    Grafo grafo2(5,5,listaAdyacencias,matrizRef);
+    grafo2.imprimeGrafo();
+    grafo2.imprimeMatriz();
     return 0;
 }
