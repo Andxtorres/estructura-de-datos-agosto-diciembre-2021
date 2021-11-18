@@ -9,6 +9,7 @@ class Hashing{
     public:
         Hashing();
         void agregarElemento(int elemento);
+        void borrar(int elemento);
         void imprimirTabla();
 };
 
@@ -45,4 +46,8 @@ void Hashing::imprimirTabla(){
 }
 int Hashing::calcularHash(int elemento){
     return elemento%11;
+}
+
+void Hashing::borrar(int elemento){
+    //Implementar esta parte
 }
