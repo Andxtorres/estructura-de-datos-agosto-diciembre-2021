@@ -24,5 +24,8 @@ int main(){
     h.agregarElemento(52);
     h.imprimirTabla();
     cout<<"---------------------"<<endl;
+    h.borrar(52);
+    h.imprimirTabla();
+    cout<<"---------------------"<<endl;
     return 0;
 }

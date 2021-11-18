@@ -1,9 +1,10 @@
 #include<iostream>
+#include "HashingElemento.h"
 using namespace std;
 
 class Hashing{
     private: 
-        int tabla[11];
+        HashingElemento tabla[11];
         int calcularHash(int elemento);
     
     public:
@@ -15,15 +16,16 @@ class Hashing{
 
 Hashing::Hashing(){
     for(int i=0;i<11;i++){
-        tabla[i]=0;
+        tabla[i]=HashingElemento(0);
     }
 }
 
 void Hashing::agregarElemento(int elemento){
+    HashingElemento aInsertar(elemento);
     int pos=calcularHash(elemento);//Calcular la pos en la que debería entrar el elemento a la tabla 
-    if(tabla[pos]!=0){ //Si la pos esta no vacía quiere decir que hay colisión
+    if(tabla[pos].getElemento()!=0){ //Si la pos esta no vacía quiere decir que hay colisión
         int inicial=pos; //igualo inicial a la pos que en teoría le toca pero colisionó 
-        while(tabla[inicial]!=0){//Recorro mientras no encuentre una pos vacía para insertar el elemento
+        while(tabla[inicial].getElemento()!=0){//Recorro mientras no encuentre una pos vacía para insertar el elemento
             inicial++;//incremento el índice del recorrido
             if(inicial==11){//Si llegue a la ultima pos de la tabla -> debo regresar al inicio
                 inicial=0;//regreso al inicio (Solo si llegue a la última pos y no encontré ninguno vacío)
@@ -33,15 +35,17 @@ void Hashing::agregarElemento(int elemento){
                 return;
             }
         }
-        tabla[inicial]=elemento; //Inserto el elemento en la primera pos vacía solo sí encontre una pos vacía 
+        aInsertar.marcarOcupado();
+        tabla[inicial]=aInsertar; //Inserto el elemento en la primera pos vacía solo sí encontre una pos vacía 
     }else{
-        tabla[pos]=elemento;//Si la pos está vacia inserto en esa pos
+        aInsertar.marcarOcupado();
+        tabla[pos]=aInsertar;//Si la pos está vacia inserto en esa pos
     }
 }
 
 void Hashing::imprimirTabla(){
     for(int i=0;i<11;i++){
-        cout<<i<<".- "<<tabla[i]<<endl;
+        cout<<i<<".- "<<tabla[i].getElemento()<<" "<<tabla[i].getBandera()<<endl;
     }
 }
 int Hashing::calcularHash(int elemento){
@@ -49,5 +53,27 @@ int Hashing::calcularHash(int elemento){
 }
 
 void Hashing::borrar(int elemento){
-    //Implementar esta parte
+    int inicial=calcularHash(elemento);
+    bool encontrado=false;
+    
+    while(tabla[inicial].getElemento()!=elemento&&inicial<11){
+        inicial++;  
+        if(tabla[inicial].getElemento()==elemento){
+            encontrado=true;
+            break;
+        }
+        if(inicial==calcularHash(elemento)){
+            break;
+        }
+        if(inicial==10){
+            inicial=0;
+        }
+    }
+    if(encontrado){
+        HashingElemento aBorrar(0);
+        aBorrar.marcarBorrado();
+        tabla[inicial]=aBorrar;
+    }else{
+        cout<<"No encontré el elemento"<<endl;
+    }
 }
