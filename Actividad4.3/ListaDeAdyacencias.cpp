@@ -2,21 +2,22 @@
 #define LISTA_DEFINED
 #include <list>
 #include <iostream>
+#include "Acceso.h"
 
 using namespace std;
 
 class ListaDeAdyacencias{
     private: 
         int numeroVertices;
-        list<int> *adyacencias;
+        list<Acceso> *adyacencias;
 
     public: 
         ListaDeAdyacencias(int numeroVertices){
             this->numeroVertices=numeroVertices;
-            adyacencias= new list<int>[numeroVertices];
+            adyacencias= new list<Acceso>[numeroVertices];
         } 
-
-        void agregarAdyacencia(int inicio, int fin){
+        
+        void agregarAdyacencia(Acceso inicio, Acceso fin){
             adyacencias[inicio].push_back(fin);
             adyacencias[fin].push_back(inicio);
         }
